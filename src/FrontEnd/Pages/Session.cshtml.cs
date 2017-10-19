@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ConferenceDTO;
-using FrontEnd.Services;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ConferenceDTO;
+using System.Text.Encodings.Web;
 
 namespace FrontEnd.Pages
 {
@@ -14,18 +13,22 @@ namespace FrontEnd.Pages
     {
         private readonly IApiClient _apiClient;
 
-        public SessionModel(IApiClient apiClient)
+        private readonly HtmlEncoder _htmlEncoder;
+
+
+        public SessionModel(IApiClient apiClient, HtmlEncoder htmlEncoder)
         {
             _apiClient = apiClient;
+            _htmlEncoder = htmlEncoder;
         }
 
         public SessionResponse Session { get; set; }
 
-        public bool IsInPersonalAgenda { get; set; }
-
         public int? DayOffset { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public bool IsInPersonalAgenda { get; set; }
+
+        public async Task<IActionResult> OnGet(int id)
         {
             Session = await _apiClient.GetSessionAsync(id);
 
@@ -34,19 +37,20 @@ namespace FrontEnd.Pages
                 return RedirectToPage("/Index");
             }
 
-            var sessions = await _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);
+            var userSessions = await _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);
 
-            IsInPersonalAgenda = sessions.Any(s => s.ID == id);
+            IsInPersonalAgenda = userSessions.Any(u => u.ID == id);
 
             var allSessions = await _apiClient.GetSessionsAsync();
 
             var startDate = allSessions.Min(s => s.StartTime?.Date);
 
             DayOffset = Session.StartTime?.DateTime.Subtract(startDate ?? DateTime.MinValue).Days;
-
             if (!string.IsNullOrEmpty(Session.Abstract))
             {
-                Session.Abstract = "<p>" + String.Join("</p><p>", Session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
+                var encodedCrLf = _htmlEncoder.Encode("\r\n");
+                var encodedAbstract = _htmlEncoder.Encode(Session.Abstract);
+                Session.Abstract = "<p>" + String.Join("</p><p>", encodedAbstract.Split(encodedCrLf, StringSplitOptions.RemoveEmptyEntries)) + "</p>";
             }
 
             return Page();

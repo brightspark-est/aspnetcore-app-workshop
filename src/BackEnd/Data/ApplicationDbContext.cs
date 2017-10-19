@@ -22,21 +22,13 @@ namespace BackEnd.Data
                .HasIndex(a => a.UserName)
                .IsUnique();
 
-            // Ignore the computed property
-            modelBuilder.Entity<Session>()
-                    .Ignore(s => s.Duration);
-
             // Many-to-many: Conference <-> Attendee
             modelBuilder.Entity<ConferenceAttendee>()
                 .HasKey(ca => new { ca.ConferenceID, ca.AttendeeID });
 
-            // Many-to-many: Session <-> Attendee
-            modelBuilder.Entity<SessionAttendee>()
-                .HasKey(ca => new { ca.SessionID, ca.AttendeeID });
-
             // Many-to-many: Speaker <-> Session
             modelBuilder.Entity<SessionSpeaker>()
-                .HasKey(ss => new { ss.SessionId, ss.SpeakerId});
+                .HasKey(ss => new { ss.SessionId, ss.SpeakerId });
 
             // Many-to-many: Session <-> Tag
             modelBuilder.Entity<SessionTag>()

@@ -43,7 +43,7 @@ namespace BackEnd.Controllers
             {
                 return NotFound();
             }
-            
+
             var result = new ConferenceDTO.ConferenceResponse
             {
                 ID = conference.ID,

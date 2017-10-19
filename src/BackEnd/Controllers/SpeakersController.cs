@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BackEnd.Data;
@@ -13,18 +14,19 @@ namespace BackEnd.Controllers
     {
         private readonly ApplicationDbContext _db;
 
-        public SpeakersController(ApplicationDbContext db)
+        public SpeakersController(ApplicationDbContext context)
         {
-            _db = db;
+            _db = context;
         }
 
+        // GET: api/Speakers
         [HttpGet]
         public async Task<IActionResult> GetSpeakers()
         {
             var speakers = await _db.Speakers.AsNoTracking()
-                                             .Include(s => s.SessionSpeakers)
-                                                .ThenInclude(ss => ss.Session)
-                                             .ToListAsync();
+                                  .Include(s => s.SessionSpeakers)
+                                    .ThenInclude(ss => ss.Session)
+                                  .ToListAsync();
 
             var result = speakers.Select(s => s.MapSpeakerResponse());
             return Ok(result);
@@ -37,12 +39,10 @@ namespace BackEnd.Controllers
                                             .Include(s => s.SessionSpeakers)
                                                 .ThenInclude(ss => ss.Session)
                                             .SingleOrDefaultAsync(s => s.ID == id);
-
             if (speaker == null)
             {
                 return NotFound();
             }
-
             var result = speaker.MapSpeakerResponse();
             return Ok(result);
         }

@@ -1,13 +1,17 @@
-﻿using System;
-using System.Net.Http;
-using FrontEnd.Infrastructure;
-using FrontEnd.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System.Net.Http;
+using FrontEnd.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using FrontEnd.Filters;
 
 namespace FrontEnd
 {
@@ -20,20 +24,21 @@ namespace FrontEnd
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options =>
-            {
-                options.Filters.AddService<RequireLoginFilter>();
-            })
-            .AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizeFolder("/Admin", "Admin");
-            });
+                {
+                    options.Filters.AddService(typeof(RequireLoginFilter));
+                })
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeFolder("/Admin", "Admin");
+                });
 
-            services.AddTransient<RequireLoginFilter>();
+            services.AddScoped<RequireLoginFilter>();
 
-            var authBuilder =  services
+            var authBuilder = services
                 .AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -45,6 +50,7 @@ namespace FrontEnd
                     options.LoginPath = "/Login";
                     options.AccessDeniedPath = "/Denied";
                 });
+
 
             var twitterConfig = Configuration.GetSection("twitter");
             if (twitterConfig["consumerKey"] != null)
@@ -58,6 +64,13 @@ namespace FrontEnd
                 authBuilder.AddGoogle(options => googleConfig.Bind(options));
             }
 
+            var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(Configuration["serviceUrl"])
+            };
+            services.AddSingleton(httpClient);
+            services.AddSingleton<IApiClient, ApiClient>();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", policy =>
@@ -67,14 +80,9 @@ namespace FrontEnd
                 });
             });
 
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(Configuration["serviceUrl"])
-            };
-            services.AddSingleton(httpClient);
-            services.AddSingleton<IApiClient, ApiClient>();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -85,8 +93,6 @@ namespace FrontEnd
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            app.UseStatusCodePagesWithReExecute("/Status/{0}");
 
             app.UseStaticFiles();
 

@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BackEnd.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackEnd
+namespace BackEnd.Controllers
 {
     [Route("/api/[controller]")]
     public class AttendeesController : Controller
@@ -20,8 +19,7 @@ namespace BackEnd
         [HttpGet("{username}")]
         public async Task<IActionResult> Get(string username)
         {
-            var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
-                                                .ThenInclude(sa => sa.Session)
+            var attendee = await _db.Attendees.Include(a => a.Sessions)
                                               .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
@@ -56,12 +54,27 @@ namespace BackEnd
 
             return CreatedAtAction(nameof(Get), new { username = result.UserName }, result);
         }
-        
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute]int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var attendee = new Attendee { ID = id };
+
+            _db.Attendees.Remove(attendee);
+            await _db.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpPost("{username}/session/{sessionId:int}")]
         public async Task<IActionResult> AddSession(string username, int sessionId)
         {
-            var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
-                                                .ThenInclude(sa => sa.Session)
+            var attendee = await _db.Attendees.Include(a => a.Sessions)
                                               .Include(a => a.ConferenceAttendees)
                                                 .ThenInclude(ca => ca.Conference)
                                               .SingleOrDefaultAsync(a => a.UserName == username);
@@ -78,11 +91,7 @@ namespace BackEnd
                 return BadRequest();
             }
 
-            attendee.SessionsAttendees.Add(new SessionAttendee
-            {
-                AttendeeID = attendee.ID,
-                SessionID = sessionId
-            });
+            attendee.Sessions.Add(session);
 
             await _db.SaveChangesAsync();
 
@@ -94,8 +103,7 @@ namespace BackEnd
         [HttpDelete("{username}/session/{sessionId:int}")]
         public async Task<IActionResult> RemoveSession(string username, int sessionId)
         {
-            var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
-                                              .SingleOrDefaultAsync(a => a.UserName == username);
+            var attendee = await _db.Attendees.SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
             {
@@ -109,10 +117,11 @@ namespace BackEnd
                 return BadRequest();
             }
 
-            var sessionAttendee = attendee.SessionsAttendees.FirstOrDefault(sa => sa.SessionID == sessionId);
-            attendee.SessionsAttendees.Remove(sessionAttendee);
+            attendee.Sessions.Remove(session);
 
             await _db.SaveChangesAsync();
+
+            var result = attendee.MapAttendeeResponse();
 
             return NoContent();
         }

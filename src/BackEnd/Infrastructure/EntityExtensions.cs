@@ -48,7 +48,7 @@ namespace BackEnd.Data
                 WebSite = speaker.WebSite,
                 Sessions = speaker.SessionSpeakers?
                     .Select(ss =>
-                        new ConferenceDTO.Session
+                        new ConferenceDTO.Session 
                         {
                             ID = ss.SessionId,
                             Title = ss.Session.Title
@@ -63,14 +63,14 @@ namespace BackEnd.Data
                 FirstName = attendee.FirstName,
                 LastName = attendee.LastName,
                 UserName = attendee.UserName,
-                Sessions = attendee.SessionsAttendees?
-                    .Select(sa =>
+                Sessions = attendee.Sessions?
+                    .Select(s =>
                         new ConferenceDTO.Session
                         {
-                            ID = sa.SessionID,
-                            Title = sa.Session.Title,
-                            StartTime = sa.Session.StartTime,
-                            EndTime = sa.Session.EndTime
+                            ID = s.ID,
+                            Title = s.Title,
+                            StartTime = s.StartTime,
+                            EndTime = s.EndTime
                         })
                     .ToList(),
                 Conferences = attendee.ConferenceAttendees?

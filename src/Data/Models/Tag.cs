@@ -2,7 +2,7 @@
 
 namespace BackEnd.Data
 {
-    public class Tag : ConferenceDTO.Tag
+    public class Tag
     {
         public virtual ICollection<SessionTag> SessionTags { get; set; }
     }

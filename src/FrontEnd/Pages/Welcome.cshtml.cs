@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using FrontEnd.Services;
-using FrontEnd.Pages.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ConferenceDTO;
+using FrontEnd.Pages.Models;
 
-namespace FrontEnd
+namespace FrontEnd.Pages
 {
     public class WelcomeModel : PageModel
     {
@@ -16,22 +16,7 @@ namespace FrontEnd
         }
 
         [BindProperty]
-        public Attendee Attendee { get; set; }
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            // Redirect to home page if user is anonymous or already registered as attendee
-            var attendee = User.Identity.IsAuthenticated
-                ? await _apiClient.GetAttendeeAsync(HttpContext.User.Identity.Name)
-                : null;
-
-            if (!User.Identity.IsAuthenticated || attendee != null)
-            {
-                return RedirectToPage("/Index");
-            }
-
-            return Page();
-        }
+        public Models.Attendee Attendee { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {

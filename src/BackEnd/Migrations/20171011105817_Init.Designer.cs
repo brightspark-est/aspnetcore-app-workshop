@@ -4,18 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170609012038_initial")]
-    partial class initial
+    [Migration("20171011105817_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
+#pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-preview1-24937")
+                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BackEnd.Data.Attendee", b =>
@@ -39,6 +42,9 @@ namespace BackEnd.Migrations
                         .HasMaxLength(200);
 
                     b.HasKey("ID");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("Attendees");
                 });
@@ -254,6 +260,7 @@ namespace BackEnd.Migrations
                         .HasForeignKey("ConferenceID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
+#pragma warning restore 612, 618
         }
     }
 }

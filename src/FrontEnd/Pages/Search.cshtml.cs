@@ -25,17 +25,17 @@ namespace FrontEnd.Pages
             Term = term;
             var results = await _apiClient.SearchAsync(term);
             SearchResults = results.Select(sr =>
-                                    {
-                                        switch (sr.Type)
-                                        {
-                                            case SearchResultType.Session:
-                                                return (object)sr.Value.ToObject<SessionResponse>();
-                                            case SearchResultType.Speaker:
-                                                return (object)sr.Value.ToObject<SpeakerResponse>();
-                                            default:
-                                                return (object)sr;
-                                        }
-                                    })
+            {
+                switch (sr.Type)
+                {
+                    case SearchResultType.Session:
+                        return (object)sr.Value.ToObject<SessionResponse>();
+                    case SearchResultType.Speaker:
+                        return (object)sr.Value.ToObject<SpeakerResponse>();
+                    default:
+                        return (object)sr;
+                }
+            })
                                     .ToList();
         }
     }

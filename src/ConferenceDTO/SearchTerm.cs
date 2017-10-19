@@ -1,4 +1,4 @@
-namespace ConferenceDTO
+﻿namespace ConferenceDTO
 {
     public class SearchTerm
     {

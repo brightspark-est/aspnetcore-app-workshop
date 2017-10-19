@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ConferenceDTO;
-using FrontEnd.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ConferenceDTO;
+using FrontEnd.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
+        public IEnumerable<IGrouping<DateTimeOffset?, SessionResponse>> Sessions { get; set; }
+
+        public IEnumerable<(int Offset, DayOfWeek? DayofWeek)> DayOffsets { get; set; }
+
+        public int CurrentDayOffset { get; set; }
+
+        public bool IsAdmin { get; set; }
+
+        public List<int> UserSessions { get; set; }
+
+        [TempData]
+        public string Message { get; set; }
+
+        public bool ShowMessage => !string.IsNullOrEmpty(Message);
+
         protected readonly IApiClient _apiClient;
 
         public IndexModel(IApiClient apiClient)
@@ -18,25 +34,12 @@ namespace FrontEnd.Pages
             _apiClient = apiClient;
         }
 
-        public IEnumerable<IGrouping<DateTimeOffset?, SessionResponse>> Sessions { get; set; }
-
-        public IEnumerable<(int Offset, DayOfWeek? DayofWeek)> DayOffsets { get; set; }
-
-        public List<int> UserSessions { get; set; }
-
-        public int CurrentDayOffset { get; set; }
-
-        [TempData]
-        public string Message { get; set; }
-
-        public bool ShowMessage => !string.IsNullOrEmpty(Message);
-
         protected virtual Task<List<SessionResponse>> GetSessionsAsync()
         {
             return _apiClient.GetSessionsAsync();
         }
 
-        public async Task OnGetAsync(int day = 0)
+        public async Task OnGet(int day = 0)
         {
             CurrentDayOffset = day;
 
@@ -61,7 +64,7 @@ namespace FrontEnd.Pages
                                .GroupBy(s => s.StartTime)
                                .OrderBy(g => g.Key);
         }
-        
+
         public async Task<IActionResult> OnPostAsync(int sessionId)
         {
             await _apiClient.AddSessionToAttendeeAsync(User.Identity.Name, sessionId);

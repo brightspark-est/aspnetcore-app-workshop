@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using BackEnd.Data;
 using ConferenceDTO;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
-namespace BackEnd
+namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     public class SearchController : Controller
@@ -25,17 +25,17 @@ namespace BackEnd
             var sessionResults = await _db.Sessions.Include(s => s.Track)
                                                    .Include(s => s.SessionSpeakers)
                                                      .ThenInclude(ss => ss.Speaker)
-                                                   .Where(s => 
-                                                       s.Title.Contains(query) || 
+                                                   .Where(s =>
+                                                       s.Title.Contains(query) ||
                                                        s.Track.Name.Contains(query)
                                                    )
                                                    .ToListAsync();
 
             var speakerResults = await _db.Speakers.Include(s => s.SessionSpeakers)
                                                      .ThenInclude(ss => ss.Session)
-                                                   .Where(s => 
-                                                       s.Name.Contains(query) || 
-                                                       s.Bio.Contains(query) || 
+                                                   .Where(s =>
+                                                       s.Name.Contains(query) ||
+                                                       s.Bio.Contains(query) ||
                                                        s.WebSite.Contains(query)
                                                    )
                                                    .ToListAsync();
@@ -53,10 +53,10 @@ namespace BackEnd
                     EndTime = s.EndTime,
                     TrackId = s.TrackId,
                     Track = new ConferenceDTO.Track
-                                {
-                                    TrackID = s?.TrackId ?? 0,
-                                    Name = s.Track?.Name
-                                },
+                    {
+                        TrackID = s?.TrackId ?? 0,
+                        Name = s.Track?.Name
+                    },
                     Speakers = s?.SessionSpeakers
                                  .Select(ss => new ConferenceDTO.Speaker
                                  {
@@ -77,7 +77,7 @@ namespace BackEnd
                     WebSite = s.WebSite,
                     Sessions = s.SessionSpeakers?
                                 .Select(ss =>
-                                    new ConferenceDTO.Session
+                                    new ConferenceDTO.Session 
                                     {
                                         ID = ss.SessionId,
                                         Title = ss.Session.Title

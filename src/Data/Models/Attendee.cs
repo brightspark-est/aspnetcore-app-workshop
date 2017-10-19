@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FrontEnd.Pages.Models
+namespace Data.Models
 {
-    public class Attendee : ConferenceDTO.Attendee
+    public class Attendee
     {
         [DisplayName("First name")]
         public override string FirstName { get => base.FirstName; set => base.FirstName = value; }

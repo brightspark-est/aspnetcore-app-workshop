@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BackEnd.Migrations
 {
-    public partial class initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,12 @@ namespace BackEnd.Migrations
                 name: "Attendees",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EmailAddress = table.Column<string>(maxLength: 256, nullable: true),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    FirstName = table.Column<string>(maxLength: 200, nullable: false),
-                    LastName = table.Column<string>(maxLength: 200, nullable: false)
+                    EmailAddress = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,9 +29,9 @@ namespace BackEnd.Migrations
                 name: "Conferences",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 200, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,9 +42,9 @@ namespace BackEnd.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 32, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,8 +55,8 @@ namespace BackEnd.Migrations
                 name: "ConferenceAttendee",
                 columns: table => new
                 {
-                    ConferenceID = table.Column<int>(nullable: false),
-                    AttendeeID = table.Column<int>(nullable: false)
+                    ConferenceID = table.Column<int>(type: "int", nullable: false),
+                    AttendeeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,12 +79,12 @@ namespace BackEnd.Migrations
                 name: "Speakers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Bio = table.Column<string>(maxLength: 4000, nullable: true),
-                    ConferenceID = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    WebSite = table.Column<string>(maxLength: 1000, nullable: true)
+                    Bio = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
+                    ConferenceID = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    WebSite = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,10 +101,10 @@ namespace BackEnd.Migrations
                 name: "Tracks",
                 columns: table => new
                 {
-                    TrackID = table.Column<int>(nullable: false)
+                    TrackID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConferenceID = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 200, nullable: false)
+                    ConferenceID = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,15 +121,15 @@ namespace BackEnd.Migrations
                 name: "Sessions",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Abstract = table.Column<string>(maxLength: 4000, nullable: true),
-                    AttendeeID = table.Column<int>(nullable: true),
-                    ConferenceID = table.Column<int>(nullable: false),
-                    EndTime = table.Column<DateTimeOffset>(nullable: true),
-                    StartTime = table.Column<DateTimeOffset>(nullable: true),
-                    Title = table.Column<string>(maxLength: 200, nullable: false),
-                    TrackId = table.Column<int>(nullable: true)
+                    Abstract = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
+                    AttendeeID = table.Column<int>(type: "int", nullable: true),
+                    ConferenceID = table.Column<int>(type: "int", nullable: false),
+                    EndTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    StartTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TrackId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -158,8 +158,8 @@ namespace BackEnd.Migrations
                 name: "SessionSpeaker",
                 columns: table => new
                 {
-                    SessionId = table.Column<int>(nullable: false),
-                    SpeakerId = table.Column<int>(nullable: false)
+                    SessionId = table.Column<int>(type: "int", nullable: false),
+                    SpeakerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,8 +182,8 @@ namespace BackEnd.Migrations
                 name: "SessionTag",
                 columns: table => new
                 {
-                    SessionID = table.Column<int>(nullable: false),
-                    TagID = table.Column<int>(nullable: false)
+                    SessionID = table.Column<int>(type: "int", nullable: false),
+                    TagID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -201,6 +201,12 @@ namespace BackEnd.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attendees_UserName",
+                table: "Attendees",
+                column: "UserName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConferenceAttendee_AttendeeID",

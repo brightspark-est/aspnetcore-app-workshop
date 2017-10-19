@@ -6,7 +6,6 @@ using ConferenceDTO;
 using FrontEnd.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd.Pages
 {
@@ -19,18 +18,13 @@ namespace FrontEnd.Pages
             _apiClient = apiClient;
         }
 
-        public SpeakerResponse Speaker { get; set; }
+        public IEnumerable<SpeakerResponse> Speakers { get; set; }
 
-        public async Task<IActionResult> OnGet(int id)
+        public async Task OnGet()
         {
-            Speaker = await _apiClient.GetSpeakerAsync(id);
+            var speakers = await _apiClient.GetSpeakersAsync();
 
-            if (Speaker == null)
-            {
-                return NotFound();
-            }
-
-            return Page();
+            Speakers = speakers.OrderBy(s => s.Name);
         }
     }
 }

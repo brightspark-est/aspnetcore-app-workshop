@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using BackEnd.Data;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Rewrite;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BackEnd.Data;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace BackEnd
@@ -24,19 +24,20 @@ namespace BackEnd
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                }
-                else
-                {
-                    options.UseSqlite("Data Source=conferences.db");
-                }
-            });
+             services.AddDbContext<ApplicationDbContext>(options =>
+             {
+                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                 {
+                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                 }
+                 else
+                 {
+                     options.UseSqlite("Data Source=conferences.db");
+                 }
+             });
 
             services.AddMvcCore()
                 .AddJsonFormatters()
@@ -45,16 +46,12 @@ namespace BackEnd
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v1", new Info { Title = "Conference Planner API", Version = "v1" })
             );
+            services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-
             app.UseSwagger();
 
             app.UseSwaggerUI(options =>
@@ -69,8 +66,7 @@ namespace BackEnd
                 return Task.CompletedTask;
             });
 
-            // Comment out the following line to avoid resetting the database each time
-            NDCSydneyData.Seed(app.ApplicationServices);
+            //NDCSydneyData.Seed(app.ApplicationServices);
         }
     }
 }
