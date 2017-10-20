@@ -9,13 +9,26 @@ namespace FrontEnd.Pages.Models
 {
     public class Session
     {
+        public int ID { get; set; }
+
+        [Required]
+        public int ConferenceID { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string Title { get; set; }
+
+        public TimeSpan Duration => EndTime?.Subtract(StartTime ?? EndTime ?? DateTime.MinValue) ?? TimeSpan.Zero;
+
+        public int? TrackId { get; set; }
+
         [DataType(DataType.MultilineText)]
-        public override string Abstract { get => base.Abstract; set => base.Abstract = value; }
+        public string Abstract { get; set; }
 
         [DisplayName("Start time")]
-        public override DateTimeOffset? StartTime { get => base.StartTime; set => base.StartTime = value; }
+        public DateTimeOffset? StartTime { get; set; }
 
         [DisplayName("End time")]
-        public override DateTimeOffset? EndTime { get => base.EndTime; set => base.EndTime = value; }
+        public DateTimeOffset? EndTime { get; set; }
     }
 }

@@ -9,14 +9,20 @@ namespace FrontEnd.Pages.Models
 {
     public class Attendee
     {
+        public int ID { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string UserName { get; set; }
+
         [DisplayName("First name")]
-        public override string FirstName { get => base.FirstName; set => base.FirstName = value; }
+        public string FirstName { get; set; }
 
         [DisplayName("Last name")]
-        public override string LastName { get => base.LastName; set => base.LastName = value; }
+        public string LastName { get; set; }
 
         [DisplayName("Email address")]
         [DataType(DataType.EmailAddress)]
-        public override string EmailAddress { get => base.EmailAddress; set => base.EmailAddress = value; }
+        public string EmailAddress { get; set; }
     }
 }
