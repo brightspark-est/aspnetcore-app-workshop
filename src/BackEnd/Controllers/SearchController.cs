@@ -5,6 +5,7 @@ using ConferenceDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Data.Models;
 
 namespace BackEnd.Controllers
 {
