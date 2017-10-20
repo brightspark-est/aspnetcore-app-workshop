@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace BackEnd.Data
+namespace Data.Models
 {
     public class ApplicationDbContext : DbContext
     {

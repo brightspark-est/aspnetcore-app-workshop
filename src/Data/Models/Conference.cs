@@ -1,9 +1,8 @@
-﻿using ConferenceDTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace BackEnd.Data
+namespace Data.Models
 {
-    public class Conference : ConferenceDTO.Conference
+    public class Conference
     {
         public virtual ICollection<Track> Tracks { get; set; }
 

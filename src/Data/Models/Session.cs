@@ -1,21 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public class Session 
+    public class Session
     {
-        [DataType(DataType.MultilineText)]
-        public override string Abstract { get => base.Abstract; set => base.Abstract = value; }
+        public Conference Conference { get; set; }
 
-        [DisplayName("Start time")]
-        public override DateTimeOffset? StartTime { get => base.StartTime; set => base.StartTime = value; }
+        public virtual ICollection<SessionSpeaker> SessionSpeakers { get; set; }
 
-        [DisplayName("End time")]
-        public override DateTimeOffset? EndTime { get => base.EndTime; set => base.EndTime = value; }
+        public Track Track { get; set; }
+
+        public virtual ICollection<SessionTag> SessionTags { get; set; }
     }
 }

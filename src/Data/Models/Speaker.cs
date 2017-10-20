@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BackEnd.Data
+namespace Data.Models
 {
     public class Speaker
     {
