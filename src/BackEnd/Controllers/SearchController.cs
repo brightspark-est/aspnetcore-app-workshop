@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BackEnd.Data;
 using ConferenceDTO;
+using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;

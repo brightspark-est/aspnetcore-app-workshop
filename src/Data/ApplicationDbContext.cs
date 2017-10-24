@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore.Design;
+
 //using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 
-namespace Data.Models
+namespace Data
 {
     public class ApplicationDbContext : DbContext
     {

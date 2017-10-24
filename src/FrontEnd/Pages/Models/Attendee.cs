@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FrontEnd.Pages.Models
 {
@@ -24,5 +20,17 @@ namespace FrontEnd.Pages.Models
         [DisplayName("Email address")]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
+
+        public ConferenceDTO.Attendee AsDto()
+        {
+            return new ConferenceDTO.Attendee
+            {
+                ID = ID,
+                UserName = UserName,
+                FirstName = FirstName,
+                LastName = LastName,
+                EmailAddress = EmailAddress
+            };
+        }
     }
 }

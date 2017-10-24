@@ -20,7 +20,7 @@ namespace FrontEnd.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _apiClient.AddAttendeeAsync(Attendee);
+            await _apiClient.AddAttendeeAsync(Attendee.AsDto());
 
             return RedirectToPage("/Index");
         }
