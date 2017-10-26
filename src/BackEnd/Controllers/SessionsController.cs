@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BackEnd.Data;
+﻿using BackEnd.Data;
 using Data;
 using Data.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BackEnd.Controllers
 {
@@ -24,12 +22,12 @@ namespace BackEnd.Controllers
         public async Task<IActionResult> Get()
         {
             var sessions = await _db.Sessions.AsNoTracking()
-                                             .Include(s => s.Track)
-                                             .Include(s => s.SessionSpeakers)
-                                                .ThenInclude(ss => ss.Speaker)
-                                             .Include(s => s.SessionTags)
-                                                .ThenInclude(st => st.Tag)
-                                             .ToListAsync();
+                             .Include(s => s.Track)
+                             .Include(s => s.SessionSpeakers)
+                                .ThenInclude(ss => ss.Speaker)
+                             .Include(s => s.SessionTags)
+                                .ThenInclude(st => st.Tag)
+                             .ToListAsync();
 
             var results = sessions.Select(s => MapSessionResponse(s));
 

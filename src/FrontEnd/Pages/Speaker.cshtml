@@ -1,8 +1,13 @@
-﻿@page "{id}"
-@model SpeakerModel
+﻿@*@page "{id}"
+@model SpeakerModel*@
+
+@model FrontEnd.Models.Speakers
+
+@*Jõuame ConferenceDTO.Speaker modelini*@
+
 <ol class="breadcrumb">
     <li><a asp-page="/Speakers">Speakers</a></li>
-    <li class="active">@Model.Speaker.Name</li>
+    <li class="active">@Model.Name</li>
 </ol>
 
 <h2>@Model.Speaker.Name</h2>

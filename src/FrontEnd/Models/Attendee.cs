@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ConferenceDTO;
 
-namespace FrontEnd.Pages.Models
+namespace FrontEnd.Models
 {
     public class Attendee
     {

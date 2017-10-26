@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace BackEnd.Migrations
+namespace Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -126,7 +126,9 @@ namespace BackEnd.Migrations
                     Abstract = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
                     AttendeeID = table.Column<int>(type: "int", nullable: true),
                     ConferenceID = table.Column<int>(type: "int", nullable: false),
+                    DayOffset = table.Column<int>(type: "int", nullable: true),
                     EndTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    IsInPersonalAgenda = table.Column<bool>(type: "bit", nullable: false),
                     StartTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     TrackId = table.Column<int>(type: "int", nullable: true)

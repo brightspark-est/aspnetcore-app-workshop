@@ -1,30 +1,31 @@
-using System.Collections.Generic;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using ConferenceDTO;
-using FrontEnd.Services;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using FrontEnd.Models;
 
-namespace FrontEnd.Pages
+namespace FrontEnd.Controllers
 {
-    public class SearchModel : PageModel
+    public class SearchController : Controller
     {
         private IApiClient _apiClient;
+        //public List<object> SearchResults;
 
-        public SearchModel(IApiClient apiClient)
+        public SearchController(IApiClient apiClient) //pean läbi modeli saama kätte va Interfaceid
         {
             _apiClient = apiClient;
         }
-
-        public string Term { get; set; }
-
-        public List<object> SearchResults { get; set; }
-
-        public async Task OnGetAsync(string term)
+        
+        public async Task Index(string term) //Indexiks muuta
         {
-            Term = term;
+
             var results = await _apiClient.SearchAsync(term);
-            SearchResults = results.Select(sr =>
+            
+            var vm = new Search();
+            vm.Term = term;
+
+            vm.SearchResults = results.Select(sr =>
             {
                 switch (sr.Type)
                 {
