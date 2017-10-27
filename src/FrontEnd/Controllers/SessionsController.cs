@@ -23,9 +23,7 @@ namespace FrontEnd.Controllers
 
         public async Task<IActionResult> Index(int id)
         {
-            
             var session = await _apiClient.GetSessionAsync(id);
-
             if (session == null)
             {
                 return RedirectToPage("/Index");
@@ -37,29 +35,27 @@ namespace FrontEnd.Controllers
 
             if (!string.IsNullOrEmpty(session.Abstract))
             {
-                session.Abstract = "<p>" + String.Join("</p><p>", session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
+                session.Abstract = "<p>" + String.Join("</p><p>",
+                                       session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
             }
 
-            return View(new FrontEnd.Models.SessionsViewModel
-            {
-
-                Session =  session,
+            var model = new FrontEnd.Models.SessionsViewModel {
+                Session = session,
                 IsInPersonalAgenda = sessions.Any(s => s.ID == id),
                 DayOffset = session.StartTime?.DateTime.Subtract(startDate ?? DateTime.MinValue).Days,
+            };
 
-        }); //Page           
-
-            
+            return View(model);          
         }
 
-        public async Task<IActionResult> OnPostAsync(int sessionId)
+        public async Task<IActionResult> Add(int sessionId)
         {
             await _apiClient.AddSessionToAttendeeAsync(User.Identity.Name, sessionId);
 
             return View(); //RedirectToPage
         }
 
-        public async Task<IActionResult> OnPostRemoveAsync(int sessionId)
+        public async Task<IActionResult> Remove(int sessionId)
         {
             await _apiClient.RemoveSessionFromAttendeeAsync(User.Identity.Name, sessionId);
 

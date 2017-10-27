@@ -14,7 +14,4 @@
     <ProjectReference Include="..\ConferenceDTO\ConferenceDTO.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\Admin\" />
-  </ItemGroup>
 </Project>

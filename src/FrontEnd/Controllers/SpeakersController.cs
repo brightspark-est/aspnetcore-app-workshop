@@ -11,21 +11,26 @@ using ConferenceDTO;
 
 namespace FrontEnd.Controllers
 {
-    public class SpeakerController : Controller
+    public class SpeakersController : Controller
     {
         private readonly IApiClient _apiClient;
-        private IOrderedEnumerable<SpeakerResponseDto> SessionSpeaker;
 
-        public SpeakerController(IApiClient apiClient)
+        public SpeakersController(IApiClient apiClient)
         {
             _apiClient = apiClient;
         }
         
-        public async Task OnGet()
+        public async Task<IActionResult> Index()
         {
-            var speakers = await _apiClient.GetSpeakersAsync();
+            IEnumerable<SpeakerResponseDto> speakers = await _apiClient.GetSpeakersAsync();
+            speakers = speakers.OrderBy(s => s.Name);
 
-            SessionSpeaker = speakers.OrderBy(s => s.Name);
+            var model = new SpeakersViewModel
+            {
+                Speaker = speakers
+            };
+
+            return View(model);
         }
     }
 }
