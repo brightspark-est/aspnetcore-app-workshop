@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FrontEnd.Models
+namespace FrontEnd.ViewModels
 {
     public class SessionsViewModel
         //muutuja oli ka Session, sellepärast selline nimi

@@ -1,4 +1,4 @@
-﻿using FrontEnd.Models;
+﻿using FrontEnd.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

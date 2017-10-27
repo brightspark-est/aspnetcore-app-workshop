@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
-using FrontEnd.Models;
+using FrontEnd.ViewModels;
 using ConferenceDTO;
 using Data.Models;
 
@@ -39,7 +39,7 @@ namespace FrontEnd.Controllers
                                        session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
             }
 
-            var model = new FrontEnd.Models.SessionsViewModel {
+            var model = new SessionsViewModel {
                 Session = session,
                 IsInPersonalAgenda = sessions.Any(s => s.ID == id),
                 DayOffset = session.StartTime?.DateTime.Subtract(startDate ?? DateTime.MinValue).Days,

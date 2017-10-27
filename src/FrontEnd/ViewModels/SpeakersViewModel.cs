@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ConferenceDTO;
 using System.ComponentModel.DataAnnotations;
 
-namespace FrontEnd.Models
+namespace FrontEnd.ViewModels
 {
     public class SpeakersViewModel
     {

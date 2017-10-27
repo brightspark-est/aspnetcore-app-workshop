@@ -1,17 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 
-namespace FrontEnd.Pages
+namespace FrontEnd.Controllers
 {
-    public class MyAgendaModel : IndexModel
+    public class MyAgendaController : HomeController
     {
-        public MyAgendaModel(IApiClient client) : base(client)
+        public MyAgendaController(IApiClient client) : base(client)
         {
 
         }

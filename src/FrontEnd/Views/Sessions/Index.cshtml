@@ -1,4 +1,4 @@
-﻿@model FrontEnd.Models.SessionsViewModel
+﻿@model FrontEnd.ViewModels.SessionsViewModel
 
 
 <ol class="breadcrumb">
@@ -12,7 +12,7 @@
 
 @foreach (var speaker in Model.Session.Speakers)
     {
-    <em><a asp-page="Speaker" asp-route-id="@speaker.ID">@speaker.Name</a></em>
+    <em><a asp-controller="Speakers" asp-action="Index" asp-route-id="@speaker.ID">@speaker.Name</a></em>
     }
 
 <p>@Html.Raw(Model.Session.Abstract)</p>

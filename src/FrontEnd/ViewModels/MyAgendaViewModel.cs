@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.ViewModels
 {
-    public class StatusViewModel
+    public class MyAgendaViewModel : IndexViewModel
     {
-        public int StatusCode { get; set; }
-
-        public string StatusCodeMessage { get; set; }
     }
 }

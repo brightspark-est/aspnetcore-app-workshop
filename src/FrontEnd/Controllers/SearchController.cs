@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ConferenceDTO;
-using FrontEnd.Models;
+using FrontEnd.ViewModels;
 
 namespace FrontEnd.Controllers
 {

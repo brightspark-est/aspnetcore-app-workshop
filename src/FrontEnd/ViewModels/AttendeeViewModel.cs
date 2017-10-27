@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using ConferenceDTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FrontEnd.Models
+namespace FrontEnd.ViewModels
 {
     public class AttendeeViewModel
     {

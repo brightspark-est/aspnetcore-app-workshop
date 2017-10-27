@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FrontEnd.Models
+namespace FrontEnd.ViewModels
 {
     public class SearchViewModel
     {

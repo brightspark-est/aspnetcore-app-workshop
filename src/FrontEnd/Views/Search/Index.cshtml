@@ -1,5 +1,5 @@
 ﻿@using ConferenceDTO
-@model FrontEnd.Models.SearchViewModel
+@model FrontEnd.ViewModels.SearchViewModel
 
 <div class="row">
     <h1>Search</h1>
@@ -22,13 +22,13 @@
         case SpeakerResponseDto speaker:
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Speaker: <a asp-page="Speaker" asp-route-id="@speaker.ID">@speaker.Name</a></h3>
+                <h3 class="panel-title">Speaker: <a asp-controller="Speakers" asp-action="Index" asp-route-id="@speaker.ID">@speaker.Name</a></h3>
             </div>
             <div class="panel-body">
                 <p>
                     @foreach (var session in speaker.Sessions)
                     {
-                    <a asp-page="/Session" asp-route-id="@session.ID"><em>@session.Title</em></a>
+                    <a asp-controller="Sessions" asp-action="Index" asp-route-id="@session.ID"><em>@session.Title</em></a>
                     }
                 </p>
                 <p>

@@ -1,18 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authentication;
 
-namespace FrontEnd.Pages
+namespace FrontEnd.Controllers
 {
-    public class LoginModel : PageModel
+    public class LoginController : Controller
     {
         private readonly IAuthenticationSchemeProvider _schemeProvider;
 
-        public LoginModel(IAuthenticationSchemeProvider schemeProvider)
+        public LoginController(IAuthenticationSchemeProvider schemeProvider)
         {
             _schemeProvider = schemeProvider;
         }
