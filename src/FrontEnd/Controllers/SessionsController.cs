@@ -46,7 +46,7 @@ namespace FrontEnd.Controllers
                 session.Abstract = "<p>" + String.Join("</p><p>", session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
             }
 
-            return  View(new FrontEnd.Models.Sessions
+            return View(new FrontEnd.Models.Sessions
             {
 
                 Session =  session,
