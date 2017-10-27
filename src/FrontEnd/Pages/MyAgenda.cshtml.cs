@@ -16,7 +16,7 @@ namespace FrontEnd.Pages
 
         }
 
-        protected override Task<List<ConferenceDTO.SessionResponse>> GetSessionsAsync()
+        protected override Task<List<ConferenceDTO.SessionResponseDto>> GetSessionsAsync()
         {
             return _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);
         }

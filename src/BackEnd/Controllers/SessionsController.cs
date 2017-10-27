@@ -56,7 +56,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]ConferenceDTO.Session input)
+        public async Task<IActionResult> Post([FromBody]ConferenceDTO.SessionDto input)
         {
             if (!ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put([FromRoute]int id, [FromBody]ConferenceDTO.Session input)
+        public async Task<IActionResult> Put([FromRoute]int id, [FromBody]ConferenceDTO.SessionDto input)
         {
             var session = await _db.Sessions.FindAsync(id);
 
@@ -127,7 +127,7 @@ namespace BackEnd.Controllers
             return NoContent();
         }
 
-        private static ConferenceDTO.SessionResponse MapSessionResponse(Session session)
+        private static ConferenceDTO.SessionResponseDto MapSessionResponse(Session session)
         {
             return session.MapSessionResponse();
         }

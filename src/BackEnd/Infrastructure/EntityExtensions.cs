@@ -9,29 +9,29 @@ namespace BackEnd.Data
 {
     public static class EntityExtensions
     {
-        public static ConferenceDTO.SessionResponse MapSessionResponse(this Session session) =>
-            new ConferenceDTO.SessionResponse
+        public static ConferenceDTO.SessionResponseDto MapSessionResponse(this Session session) =>
+            new ConferenceDTO.SessionResponseDto
             {
                 ID = session.ID,
                 Title = session.Title,
                 StartTime = session.StartTime,
                 EndTime = session.EndTime,
                 Tags = session.SessionTags?
-                              .Select(st => new ConferenceDTO.Tag
+                              .Select(st => new ConferenceDTO.TagDto
                               {
                                   ID = st.TagID,
                                   Name = st.Tag.Name
                               })
                                .ToList(),
                 Speakers = session.SessionSpeakers?
-                                  .Select(ss => new ConferenceDTO.Speaker
+                                  .Select(ss => new ConferenceDTO.SpeakerDto
                                   {
                                       ID = ss.SpeakerId,
                                       Name = ss.Speaker.Name
                                   })
                                    .ToList(),
                 TrackId = session.TrackId,
-                Track = new ConferenceDTO.Track
+                Track = new ConferenceDTO.TrackDto
                 {
                     TrackID = session?.TrackId ?? 0,
                     Name = session.Track?.Name
@@ -40,8 +40,8 @@ namespace BackEnd.Data
                 Abstract = session.Abstract
             };
 
-        public static ConferenceDTO.SpeakerResponse MapSpeakerResponse(this Speaker speaker) =>
-            new ConferenceDTO.SpeakerResponse
+        public static ConferenceDTO.SpeakerResponseDto MapSpeakerResponse(this Speaker speaker) =>
+            new ConferenceDTO.SpeakerResponseDto
             {
                 ID = speaker.ID,
                 Name = speaker.Name,
@@ -49,7 +49,7 @@ namespace BackEnd.Data
                 WebSite = speaker.WebSite,
                 Sessions = speaker.SessionSpeakers?
                     .Select(ss =>
-                        new ConferenceDTO.Session 
+                        new ConferenceDTO.SessionDto 
                         {
                             ID = ss.SessionId,
                             Title = ss.Session.Title
@@ -57,8 +57,8 @@ namespace BackEnd.Data
                     .ToList()
             };
 
-        public static ConferenceDTO.AttendeeResponse MapAttendeeResponse(this Attendee attendee) =>
-            new ConferenceDTO.AttendeeResponse
+        public static ConferenceDTO.AttendeeResponseDto MapAttendeeResponse(this Attendee attendee) =>
+            new ConferenceDTO.AttendeeResponseDto
             {
                 ID = attendee.ID,
                 FirstName = attendee.FirstName,
@@ -66,7 +66,7 @@ namespace BackEnd.Data
                 UserName = attendee.UserName,
                 Sessions = attendee.Sessions?
                     .Select(s =>
-                        new ConferenceDTO.Session
+                        new ConferenceDTO.SessionDto
                         {
                             ID = s.ID,
                             Title = s.Title,
@@ -76,7 +76,7 @@ namespace BackEnd.Data
                     .ToList(),
                 Conferences = attendee.ConferenceAttendees?
                     .Select(ca =>
-                        new ConferenceDTO.Conference
+                        new ConferenceDTO.ConferenceDto
                         {
                             ID = ca.ConferenceID,
                             Name = ca.Conference.Name

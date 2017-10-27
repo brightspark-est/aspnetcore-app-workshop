@@ -18,14 +18,14 @@ namespace FrontEnd.Services
             _httpClient = httpClient;
         }
 
-        public async Task AddAttendeeAsync(Attendee attendee)
+        public async Task AddAttendeeAsync(AttendeeDto attendee)
         {
             var response = await _httpClient.PostJsonAsync($"/api/attendees", attendee);
 
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<AttendeeResponse> GetAttendeeAsync(string name)
+        public async Task<AttendeeResponseDto> GetAttendeeAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -41,10 +41,10 @@ namespace FrontEnd.Services
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsJsonAsync<AttendeeResponse>();
+            return await response.Content.ReadAsJsonAsync<AttendeeResponseDto>();
         }
 
-        public async Task<SessionResponse> GetSessionAsync(int id)
+        public async Task<SessionResponseDto> GetSessionAsync(int id)
         {
             var response = await _httpClient.GetAsync($"/api/sessions/{id}");
 
@@ -55,16 +55,16 @@ namespace FrontEnd.Services
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsJsonAsync<SessionResponse>();
+            return await response.Content.ReadAsJsonAsync<SessionResponseDto>();
         }
 
-        public async Task<List<SessionResponse>> GetSessionsAsync()
+        public async Task<List<SessionResponseDto>> GetSessionsAsync()
         {
             var response = await _httpClient.GetAsync("/api/sessions");
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsJsonAsync<List<SessionResponse>>();
+            return await response.Content.ReadAsJsonAsync<List<SessionResponseDto>>();
         }
 
         public async Task DeleteSessionAsync(int id)
@@ -79,7 +79,7 @@ namespace FrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<SpeakerResponse> GetSpeakerAsync(int id)
+        public async Task<SpeakerResponseDto> GetSpeakerAsync(int id)
         {
             var response = await _httpClient.GetAsync($"/api/speakers/{id}");
 
@@ -90,28 +90,28 @@ namespace FrontEnd.Services
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsJsonAsync<SpeakerResponse>();
+            return await response.Content.ReadAsJsonAsync<SpeakerResponseDto>();
         }
 
-        public async Task<List<SpeakerResponse>> GetSpeakersAsync()
+        public async Task<List<SpeakerResponseDto>> GetSpeakersAsync()
         {
             var response = await _httpClient.GetAsync("/api/speakers");
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsJsonAsync<List<SpeakerResponse>>();
+            return await response.Content.ReadAsJsonAsync<List<SpeakerResponseDto>>();
         }
 
-        public async Task PutSessionAsync(Session session)
+        public async Task PutSessionAsync(SessionDto session)
         {
             var response = await _httpClient.PutJsonAsync($"/api/sessions/{session.ID}", session);
 
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<List<SearchResult>> SearchAsync(string query)
+        public async Task<List<SearchResultDto>> SearchAsync(string query)
         {
-            var term = new SearchTerm
+            var term = new SearchTermDto
             {
                 Query = query
             };
@@ -120,7 +120,7 @@ namespace FrontEnd.Services
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsJsonAsync<List<SearchResult>>();
+            return await response.Content.ReadAsJsonAsync<List<SearchResultDto>>();
         }
 
         public async Task AddSessionToAttendeeAsync(string name, int sessionId)
@@ -137,7 +137,7 @@ namespace FrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<List<SessionResponse>> GetSessionsByAttendeeAsync(string name)
+        public async Task<List<SessionResponseDto>> GetSessionsByAttendeeAsync(string name)
         {
             // TODO: Add backend API for this
 
@@ -151,7 +151,7 @@ namespace FrontEnd.Services
 
             if (attendee == null)
             {
-                return new List<SessionResponse>();
+                return new List<SessionResponseDto>();
             }
 
             var sessionIds = attendee.Sessions.Select(s => s.ID);

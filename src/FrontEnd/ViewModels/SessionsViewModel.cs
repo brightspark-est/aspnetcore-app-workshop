@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Models
 {
-    public class Sessions
+    public class SessionsViewModel
         //muutuja oli ka Session, sellepärast selline nimi
     {
-        public SessionResponse Session { get; set; }
+        public SessionResponseDto Session { get; set; }
 
         public int? DayOffset { get; set; }
 
@@ -25,9 +25,9 @@ namespace FrontEnd.Models
 
         public virtual DateTimeOffset? StartTime { get; set; }
        
-        public Session AsDto()
+        public SessionDto AsDto()
         {
-            return new Session
+            return new SessionDto
             {                               
                 Title = Title,                                
                 StartTime = StartTime,

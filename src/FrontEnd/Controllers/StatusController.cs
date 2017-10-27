@@ -12,7 +12,7 @@ namespace FrontEnd.Controllers
     {
         public void Status(int statusCode)
         {
-            var vm = new Status();
+            var vm = new StatusViewModel();
                        
             vm.StatusCode = statusCode;
 

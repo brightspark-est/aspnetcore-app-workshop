@@ -8,23 +8,18 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Controllers
 {
-    public class WelcomeController : Controller
+    public class AttendeeController : Controller
     {
-
-
         private readonly IApiClient _apiClient;
 
-        public WelcomeController(IApiClient apiClient)
+        public AttendeeController(IApiClient apiClient)
         {
             _apiClient = apiClient;
         }
 
-        public async Task<IActionResult> OnPostAsync(Welcome model)
+        public async Task<IActionResult> OnPostAsync(AttendeeViewModel model)
         {
-            
-            
-
-            await _apiClient.AddAttendeeAsync(model.Attendee.AsDto());
+            await _apiClient.AddAttendeeAsync(model.AsDto());
 
             return RedirectToPage("/Index");
         }

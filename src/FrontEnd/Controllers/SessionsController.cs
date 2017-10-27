@@ -32,29 +32,20 @@ namespace FrontEnd.Controllers
             }
 
             var sessions = await _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);
-
-            //IsInPersonalAgenda = sessions.Any(s => s.ID == id);
-
             var allSessions = await _apiClient.GetSessionsAsync();
-
             var startDate = allSessions.Min(s => s.StartTime?.Date);
-
-            //DayOffset = Session.StartTime?.DateTime.Subtract(startDate ?? DateTime.MinValue).Days;
 
             if (!string.IsNullOrEmpty(session.Abstract))
             {
                 session.Abstract = "<p>" + String.Join("</p><p>", session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
             }
 
-            return View(new FrontEnd.Models.Sessions
+            return View(new FrontEnd.Models.SessionsViewModel
             {
 
                 Session =  session,
-
                 IsInPersonalAgenda = sessions.Any(s => s.ID == id),
-
                 DayOffset = session.StartTime?.DateTime.Subtract(startDate ?? DateTime.MinValue).Days,
-
 
         }); //Page           
 

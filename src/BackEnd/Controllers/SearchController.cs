@@ -21,7 +21,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search([FromBody]SearchTerm term)
+        public async Task<IActionResult> Search([FromBody]SearchTermDto term)
         {
             var query = term.Query;
             var sessionResults = await _db.Sessions.Include(s => s.Track)
@@ -42,10 +42,10 @@ namespace BackEnd.Controllers
                                                    )
                                                    .ToListAsync();
 
-            var results = sessionResults.Select(s => new SearchResult
+            var results = sessionResults.Select(s => new SearchResultDto
             {
                 Type = SearchResultType.Session,
-                Value = JObject.FromObject(new SessionResponse
+                Value = JObject.FromObject(new SessionResponseDto
                 {
                     ID = s.ID,
                     Title = s.Title,
@@ -54,13 +54,13 @@ namespace BackEnd.Controllers
                     StartTime = s.StartTime,
                     EndTime = s.EndTime,
                     TrackId = s.TrackId,
-                    Track = new ConferenceDTO.Track
+                    Track = new ConferenceDTO.TrackDto
                     {
                         TrackID = s?.TrackId ?? 0,
                         Name = s.Track?.Name
                     },
                     Speakers = s?.SessionSpeakers
-                                 .Select(ss => new ConferenceDTO.Speaker
+                                 .Select(ss => new ConferenceDTO.SpeakerDto
                                  {
                                      ID = ss.SpeakerId,
                                      Name = ss.Speaker.Name
@@ -68,10 +68,10 @@ namespace BackEnd.Controllers
                                  .ToList()
                 })
             })
-            .Concat(speakerResults.Select(s => new SearchResult
+            .Concat(speakerResults.Select(s => new SearchResultDto
             {
                 Type = SearchResultType.Speaker,
-                Value = JObject.FromObject(new SpeakerResponse
+                Value = JObject.FromObject(new SpeakerResponseDto
                 {
                     ID = s.ID,
                     Name = s.Name,
@@ -79,7 +79,7 @@ namespace BackEnd.Controllers
                     WebSite = s.WebSite,
                     Sessions = s.SessionSpeakers?
                                 .Select(ss =>
-                                    new ConferenceDTO.Session 
+                                    new ConferenceDTO.SessionDto 
                                     {
                                         ID = ss.SessionId,
                                         Title = ss.Session.Title

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ConferenceDTO
 {
-    public class SearchResult
+    public class SearchResultDto
     {
         public SearchResultType Type { get; set; }
 

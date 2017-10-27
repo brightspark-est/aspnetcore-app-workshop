@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Models
 {
-    public class Search
+    public class SearchViewModel
     {
         public string Term { get; set; }
 

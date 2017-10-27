@@ -1,5 +1,5 @@
 ﻿@using ConferenceDTO
-@model FrontEnd.Models.Search
+@model FrontEnd.Models.SearchViewModel
 
 <div class="row">
     <h1>Search</h1>
@@ -19,7 +19,7 @@
     <div>
         @switch (result)
         {
-        case SpeakerResponse speaker:
+        case SpeakerResponseDto speaker:
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Speaker: <a asp-page="Speaker" asp-route-id="@speaker.ID">@speaker.Name</a></h3>
@@ -38,7 +38,7 @@
         </div>
         break;
 
-        case SessionResponse session:
+        case SessionResponseDto session:
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Session: <a asp-page="Session" asp-route-id="@session.ID">@session.Title</a></h3>

@@ -1,4 +1,4 @@
-﻿@model FrontEnd.Models.Welcome
+﻿@model FrontEnd.Models.AttendeeViewModel
 
 <h2>Welcome @User.Identity.Name</h2>
 <p>
@@ -7,33 +7,33 @@
 
 <form method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <input asp-for="Attendee.UserName" value="@User.Identity.Name" type="hidden" />
+    <input asp-for="UserName" value="@User.Identity.Name" type="hidden" />
     <div class="form-group">
-        <label asp-for="Attendee.FirstName" class="control-label"></label>
+        <label asp-for="FirstName" class="control-label"></label>
         <div class="row">
             <div class="col-md-6">
-                <input asp-for="Attendee.FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control" />
             </div>
         </div>
-        <span asp-validation-for="Attendee.FirstName" class="text-danger"></span>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Attendee.LastName" class="control-label"></label>
+        <label asp-for="LastName" class="control-label"></label>
         <div class="row">
             <div class="col-md-6">
-                <input asp-for="Attendee.LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" />
             </div>
         </div>
-        <span asp-validation-for="Attendee.LastName" class="text-danger"></span>
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Attendee.EmailAddress" class="control-label"></label>
+        <label asp-for="EmailAddress" class="control-label"></label>
         <div class="row">
             <div class="col-md-6">
-                <input asp-for="Attendee.EmailAddress" class="form-control" />
+                <input asp-for="EmailAddress" class="form-control" />
             </div>
         </div>
-        <span asp-validation-for="Attendee.EmailAddress" class="text-danger"></span>
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
     </div>
     <div class="form-group">
         <div class="">

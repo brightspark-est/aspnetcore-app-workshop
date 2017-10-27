@@ -24,12 +24,12 @@ namespace FrontEnd.Pages.Admin
         public bool ShowMessage => !string.IsNullOrEmpty(Message);
 
         [BindProperty]
-        public Session Session { get; set; }
+        public SessionDto Session { get; set; }
 
         public async Task OnGetAsync(int id)
         {
             var session = await _apiClient.GetSessionAsync(id);
-            Session = new Session
+            Session = new SessionDto
             {
                 ID = session.ID,
                 ConferenceID = session.ConferenceID,

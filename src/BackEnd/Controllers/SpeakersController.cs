@@ -50,7 +50,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSpeaker([FromBody]ConferenceDTO.Speaker input)
+        public async Task<IActionResult> CreateSpeaker([FromBody]ConferenceDTO.SpeakerDto input)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateSpeaker([FromRoute]int id, [FromBody]ConferenceDTO.Speaker input)
+        public async Task<IActionResult> UpdateSpeaker([FromRoute]int id, [FromBody]ConferenceDTO.SpeakerDto input)
         {
             var speaker = await _db.FindAsync<Speaker>(id);
 

@@ -35,7 +35,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]ConferenceDTO.Attendee input)
+        public async Task<IActionResult> Post([FromBody]ConferenceDTO.AttendeeDto input)
         {
             if (!ModelState.IsValid)
             {

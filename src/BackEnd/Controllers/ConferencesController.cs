@@ -25,7 +25,7 @@ namespace BackEnd.Controllers
         {
             var conferences = await _db.Conferences.AsNoTracking().ToListAsync();
 
-            var result = conferences.Select(s => new ConferenceDTO.ConferenceResponse
+            var result = conferences.Select(s => new ConferenceDTO.ConferenceResponseDto
             {
                 ID = s.ID,
                 Name = s.Name,
@@ -46,7 +46,7 @@ namespace BackEnd.Controllers
                 return NotFound();
             }
 
-            var result = new ConferenceDTO.ConferenceResponse
+            var result = new ConferenceDTO.ConferenceResponseDto
             {
                 ID = conference.ID,
                 Name = conference.Name,
@@ -58,7 +58,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateConference([FromBody] ConferenceDTO.Conference input)
+        public async Task<IActionResult> CreateConference([FromBody] ConferenceDTO.ConferenceDto input)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace BackEnd.Controllers
             _db.Conferences.Add(conference);
             await _db.SaveChangesAsync();
 
-            var result = new ConferenceDTO.ConferenceResponse
+            var result = new ConferenceDTO.ConferenceResponseDto
             {
                 ID = conference.ID,
                 Name = conference.Name,
@@ -86,7 +86,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateConference([FromRoute]int id, [FromBody]ConferenceDTO.Conference input)
+        public async Task<IActionResult> UpdateConference([FromRoute]int id, [FromBody]ConferenceDTO.ConferenceDto input)
         {
             var conference = await _db.FindAsync<Conference>(id);
 
@@ -104,7 +104,7 @@ namespace BackEnd.Controllers
 
             await _db.SaveChangesAsync();
 
-            var result = new ConferenceDTO.ConferenceResponse
+            var result = new ConferenceDTO.ConferenceResponseDto
             {
                 ID = conference.ID,
                 Name = conference.Name,

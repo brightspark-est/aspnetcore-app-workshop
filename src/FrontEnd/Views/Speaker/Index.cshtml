@@ -1,0 +1,30 @@
+﻿@model FrontEnd.Models.SpeakersViewModel
+
+
+@*Jõuame ConferenceDTO.Speaker modelini*@
+<h3>Sessions</h3>
+<div class="row">
+    <div class="col-md-5">
+        <ul class="list-group">
+
+            @*peab jõudma ConferenceDTO.Speaker-ni välja*@
+            @foreach (var speaker in Model.Speaker)
+            {
+                <ol class="breadcrumb">
+                    <li><a asp-page="/Speakers">Speakers</a></li>
+                    <li class="active">@speaker.Name</li>
+                </ol>
+
+                <h2>@speaker.Name</h2>
+
+                <p>@speaker.Bio</p>
+
+                @*peab jõudma ConferenceDTO.Sessions-ni välja*@
+            foreach (var session in speaker.Sessions)
+            {
+                    <li class="list-group-item"><a asp-page="Session" asp-route-id="@session.ID">@session.Title</a></li>
+                }
+            }
+        </ul>
+    </div>
+</div>

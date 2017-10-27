@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Models
 {
-    public class Status
+    public class StatusViewModel
     {
         public int StatusCode { get; set; }
 

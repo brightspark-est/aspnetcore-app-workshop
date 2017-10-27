@@ -19,7 +19,7 @@ namespace FrontEnd.Controllers
         {
             var results = await _apiClient.SearchAsync(term);
 
-            var vm = new Search
+            var vm = new SearchViewModel
             {
                 Term = term,
                 SearchResults = results.Select(sr =>
@@ -27,9 +27,9 @@ namespace FrontEnd.Controllers
                         switch (sr.Type)
                         {
                             case SearchResultType.Session:
-                                return (object) sr.Value.ToObject<SessionResponse>();
+                                return (object) sr.Value.ToObject<SessionResponseDto>();
                             case SearchResultType.Speaker:
-                                return (object) sr.Value.ToObject<SpeakerResponse>();
+                                return (object) sr.Value.ToObject<SpeakerResponseDto>();
                             default:
                                 return (object) sr;
                         }

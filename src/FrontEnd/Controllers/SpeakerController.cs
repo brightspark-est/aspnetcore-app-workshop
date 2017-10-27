@@ -14,7 +14,7 @@ namespace FrontEnd.Controllers
     public class SpeakerController : Controller
     {
         private readonly IApiClient _apiClient;
-        private IOrderedEnumerable<SpeakerResponse> SessionSpeaker;
+        private IOrderedEnumerable<SpeakerResponseDto> SessionSpeaker;
 
         public SpeakerController(IApiClient apiClient)
         {

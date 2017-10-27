@@ -12,7 +12,7 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<IGrouping<DateTimeOffset?, SessionResponse>> Sessions { get; set; }
+        public IEnumerable<IGrouping<DateTimeOffset?, SessionResponseDto>> Sessions { get; set; }
 
         public IEnumerable<(int Offset, DayOfWeek? DayofWeek)> DayOffsets { get; set; }
 
@@ -34,7 +34,7 @@ namespace FrontEnd.Pages
             _apiClient = apiClient;
         }
 
-        protected virtual Task<List<SessionResponse>> GetSessionsAsync()
+        protected virtual Task<List<SessionResponseDto>> GetSessionsAsync()
         {
             return _apiClient.GetSessionsAsync();
         }
