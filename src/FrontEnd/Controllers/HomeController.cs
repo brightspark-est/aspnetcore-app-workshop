@@ -36,7 +36,7 @@ namespace FrontEnd.Controllers
 
             var filterDate = startDate?.AddDays(day);
 
-            return View(new IndexViewModel
+            return View(new MyAgendaViewModel
             {
                 CurrentDayOffset = day,
 
