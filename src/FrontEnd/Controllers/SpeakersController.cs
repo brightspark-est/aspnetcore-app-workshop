@@ -27,7 +27,7 @@ namespace FrontEnd.Controllers
 
             var model = new SpeakersViewModel
             {
-                Speaker = speakers
+                Speakers = speakers
             };
 
             return View(model);

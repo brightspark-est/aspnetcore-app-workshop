@@ -1,30 +1,24 @@
 ﻿@model FrontEnd.ViewModels.SpeakersViewModel
+@{
+    ViewData["Title"] = "Speakers";
+}
 
-
-@*Jõuame ConferenceDTO.Speaker modelini*@
-<h3>Sessions</h3>
-<div class="row">
-    <div class="col-md-5">
-        <ul class="list-group">
-
-            @*peab jõudma ConferenceDTO.Speaker-ni välja*@
-            @foreach (var speaker in Model.Speaker)
-            {
-                <ol class="breadcrumb">
-                    <li><a asp-page="/Speakers">Speakers</a></li>
-                    <li class="active">@speaker.Name</li>
-                </ol>
-
-                <h2>@speaker.Name</h2>
-
-                <p>@speaker.Bio</p>
-
-                @*peab jõudma ConferenceDTO.Sessions-ni välja*@
-            foreach (var session in speaker.Sessions)
-            {
-                    <li class="list-group-item"><a asp-controller="Sessions" asp-action="Index" asp-route-id="@session.ID">@session.Title</a></li>
-                }
-            }
-        </ul>
+<div class="speaker-list">
+    <h1>NDC Sydney 2017</h1>
+    <div class="row">
+        @foreach (var speaker in Model.Speakers)
+        {
+            <div class="col-md-3">
+                <div class="panel panel-default speaker">
+                    <div class="panel-body">
+                        <h3 class="panel-title"><a asp-controller="Speaker" asp-action="Index" asp-route-id="@speaker.ID">@speaker.Name</a></h3>
+                        @foreach (var session in speaker.Sessions)
+                        {
+                            <em><a asp-controller="Sessions" asp-action="Index" asp-route-id="@session.ID">@session.Title</a></em>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

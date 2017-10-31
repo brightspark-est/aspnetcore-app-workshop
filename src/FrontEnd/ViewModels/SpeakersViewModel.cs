@@ -9,7 +9,7 @@ namespace FrontEnd.ViewModels
 {
     public class SpeakersViewModel
     {
-        public IEnumerable<SpeakerResponseDto> Speaker { get; set; }
+        public IEnumerable<SpeakerResponseDto> Speakers { get; set; }
 
 
         //[Required]
