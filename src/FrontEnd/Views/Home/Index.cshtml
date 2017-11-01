@@ -33,11 +33,11 @@
                     <div class="panel panel-default session">
                         <div class="panel-body">
                             <p>@session.Track?.Name</p>
-                            <h3 class="panel-title"><a asp-page="/Session" asp-route-id="@session.ID">@session.Title</a></h3>
+                            <h3 class="panel-title"><a asp-controller="Sessions" asp-action="Index" asp-route-id="@session.ID">@session.Title</a></h3>
                             <p>
                                 @foreach (var speaker in session.Speakers)
                                 {
-                                    <em><a asp-page="/Speaker" asp-route-id="@speaker.ID">@speaker.Name</a></em>
+                                    <em><a asp-controller="Speaker" asp-action="Index" asp-route-id="@speaker.ID">@speaker.Name</a></em>
                                 }
                             </p>
                             <form method="post">

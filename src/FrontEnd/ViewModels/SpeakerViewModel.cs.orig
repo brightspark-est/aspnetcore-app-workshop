@@ -1,0 +1,27 @@
+<<<<<<< HEAD
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ConferenceDTO;
+using System.ComponentModel.DataAnnotations;
+=======
+﻿using ConferenceDTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+>>>>>>> 64390a426f9ba62c747964a1f6aa581f542daee9
+
+namespace FrontEnd.ViewModels
+{
+    public class SpeakerViewModel
+    {
+<<<<<<< HEAD
+        public IEnumerable<SpeakerResponseDto> Speaker { get; set; }
+=======
+        public SpeakerResponseDto Speaker { get; set; }
+
+>>>>>>> 64390a426f9ba62c747964a1f6aa581f542daee9
+    }
+}

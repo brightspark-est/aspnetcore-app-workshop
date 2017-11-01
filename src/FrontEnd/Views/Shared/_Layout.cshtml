@@ -26,12 +26,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">NDC Sydney 2017</a>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">NDC Sydney 2017</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-action="Index" asp-controller="Search">Search</a></li>
-                    <li><a asp-action="Index" asp-controller="Agenda">Agenda</a></li>
+                    <li><a asp-action="Index" asp-controller="MyAgenda">Agenda</a></li>
                     <li><a asp-action="Index" asp-controller="Speakers">Speakers</a></li>
                     <li authz="true"><a asp-page="/MyAgenda">My Agenda</a></li>
                 </ul>
@@ -41,7 +41,7 @@
                         <li authz="true">
                             <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
                         </li>
-                        <li authz="false"><a asp-page="/Login">Log in</a></li>
+                        <li authz="false"><a asp-controller="Login" asp-action="Index">Log in</a></li>
                     </ul>
                 </form>
             </div>

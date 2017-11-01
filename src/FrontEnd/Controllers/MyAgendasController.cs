@@ -14,6 +14,11 @@ namespace FrontEnd.Controllers
 
         protected override Task<List<ConferenceDTO.SessionResponseDto>> GetSessionsAsync()
         {
+            if (User.Identity.Name == null)
+            {
+                return _apiClient.GetSessionsAsync();
+            }
+
             return _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);
         }
     }

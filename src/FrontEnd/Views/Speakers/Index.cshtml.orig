@@ -1,7 +1,11 @@
-@model FrontEnd.ViewModels.SpeakersViewModel
+<<<<<<< HEAD
+﻿@model FrontEnd.ViewModels.SpeakerViewModel
+=======
+﻿@model FrontEnd.ViewModels.SpeakersViewModel
 @{
     ViewData["Title"] = "Speakers";
 }
+>>>>>>> 64390a426f9ba62c747964a1f6aa581f542daee9
 
 <div class="speaker-list">
     <h1>NDC Sydney 2017</h1>

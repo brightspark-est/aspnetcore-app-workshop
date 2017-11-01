@@ -8,11 +8,11 @@ using FrontEnd.ViewModels;
 
 namespace FrontEnd.Controllers
 {
-    public class LoginsController : Controller
+    public class LoginController : Controller
     {
         private readonly IAuthenticationSchemeProvider _schemeProvider;
-
-        public LoginsController(IAuthenticationSchemeProvider schemeProvider)
+        
+        public LoginController(IAuthenticationSchemeProvider schemeProvider)
         {
             _schemeProvider = schemeProvider;
         }

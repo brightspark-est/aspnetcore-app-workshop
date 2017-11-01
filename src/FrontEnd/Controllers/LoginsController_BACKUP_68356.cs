@@ -11,8 +11,13 @@ namespace FrontEnd.Controllers
     public class LoginsController : Controller
     {
         private readonly IAuthenticationSchemeProvider _schemeProvider;
+<<<<<<< HEAD:src/FrontEnd/Controllers/LoginsController.cs
 
         public LoginsController(IAuthenticationSchemeProvider schemeProvider)
+=======
+        
+        public LoginController(IAuthenticationSchemeProvider schemeProvider)
+>>>>>>> 64390a426f9ba62c747964a1f6aa581f542daee9:src/FrontEnd/Controllers/LoginController.cs
         {
             _schemeProvider = schemeProvider;
         }
