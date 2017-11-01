@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd.Controllers
 {
-    public class MyAgendaController : HomeController
+    public class MyAgendasController : HomesController
     {
-        public MyAgendaController(IApiClient client) : base(client)
+        public MyAgendasController(IApiClient client) : base(client)
         {
-
         }
 
         protected override Task<List<ConferenceDTO.SessionResponseDto>> GetSessionsAsync()

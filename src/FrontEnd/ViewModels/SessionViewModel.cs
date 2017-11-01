@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.ViewModels
 {
-    public class SessionsViewModel
-        //muutuja oli ka Session, sellepärast selline nimi
+    public class SessionViewModel
     {
         public SessionResponseDto Session { get; set; }
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd.Controllers
 {
-    public class AccountController : Controller
+    public class AccountsController : Controller
     {
         [HttpPost]
         public async Task<IActionResult> Logout()

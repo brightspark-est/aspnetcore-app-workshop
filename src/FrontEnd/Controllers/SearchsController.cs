@@ -6,16 +6,16 @@ using FrontEnd.ViewModels;
 
 namespace FrontEnd.Controllers
 {
-    public class SearchController : Controller
+    public class SearchsController : Controller
     {
         private readonly IApiClient _apiClient;
 
-        public SearchController(IApiClient apiClient) //pean läbi modeli saama kätte va Interfaceid
+        public SearchsController(IApiClient apiClient)
         {
             _apiClient = apiClient;
         }
 
-        public async Task<IActionResult> Index(string term) //Indexiks muuta
+        public async Task<IActionResult> Index(string term)
         {
             var results = await _apiClient.SearchAsync(term);
 
@@ -36,7 +36,6 @@ namespace FrontEnd.Controllers
                     })
                     .ToList()
             };
-
             return View(vm);
         }
     }

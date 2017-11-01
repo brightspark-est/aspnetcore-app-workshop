@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Controllers
 {
-    public class HomeController : Controller
+    public class HomesController : Controller
     {
         protected readonly IApiClient _apiClient;
 
-        public HomeController(IApiClient apiClient)
+        public HomesController(IApiClient apiClient)
         {
             _apiClient = apiClient;
         }

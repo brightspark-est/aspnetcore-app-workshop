@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Controllers
 {
-    public class AttendeeController : Controller
+    public class AttendeesController : Controller
     {
         private readonly IApiClient _apiClient;
 
-        public AttendeeController(IApiClient apiClient)
+        public AttendeesController(IApiClient apiClient)
         {
             _apiClient = apiClient;
         }

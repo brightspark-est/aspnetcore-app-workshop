@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace FrontEnd.Controllers
 {
-    public class LoginController : Controller
+    public class LoginsController : Controller
     {
         private readonly IAuthenticationSchemeProvider _schemeProvider;
 
-        public LoginController(IAuthenticationSchemeProvider schemeProvider)
+        public LoginsController(IAuthenticationSchemeProvider schemeProvider)
         {
             _schemeProvider = schemeProvider;
         }

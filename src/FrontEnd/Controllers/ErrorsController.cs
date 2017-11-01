@@ -8,11 +8,11 @@ using System.Diagnostics;
 
 namespace FrontEnd.Controllers
 {
-    public class ErrorController : Controller
+    public class ErrorsController : Controller
     {
         private ErrorViewModel _error;
 
-        public ErrorController(ErrorViewModel error)
+        public ErrorsController(ErrorViewModel error)
         {
             _error = error;
         }

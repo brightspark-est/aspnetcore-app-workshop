@@ -39,7 +39,7 @@ namespace FrontEnd.Controllers
                                        session.Abstract.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)) + "</p>";
             }
 
-            var model = new SessionsViewModel {
+            var model = new SessionViewModel {
                 Session = session,
                 IsInPersonalAgenda = sessions.Any(s => s.ID == id),
                 DayOffset = session.StartTime?.DateTime.Subtract(startDate ?? DateTime.MinValue).Days,
@@ -52,14 +52,14 @@ namespace FrontEnd.Controllers
         {
             await _apiClient.AddSessionToAttendeeAsync(User.Identity.Name, sessionId);
 
-            return View(); //RedirectToPage
+            return View();
         }
 
         public async Task<IActionResult> Remove(int sessionId)
         {
             await _apiClient.RemoveSessionFromAttendeeAsync(User.Identity.Name, sessionId);
 
-            return View(); //RedirectToPage
+            return View();
         }
 
     }
