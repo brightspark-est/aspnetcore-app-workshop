@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ConferenceDTO;
-using FrontEnd.Services;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Authorization;
+﻿using FrontEnd.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using FrontEnd.ViewModels;
+using System.Threading.Tasks;
 
 namespace FrontEnd.Controllers
 {
@@ -32,7 +25,7 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            return View(model);
+            return View();
         }
     }
 }

@@ -24,16 +24,11 @@ namespace FrontEnd.Controllers
         public async Task<IActionResult> Index(int day = 0)
         {
             var userSessions = new List<SessionResponseDto>();
-
             userSessions = await _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);
-
             var sessions = await GetSessionsAsync();
-
             var startDate = sessions.Min(s => s.StartTime?.Date);
             var endDate = sessions.Max(s => s.EndTime?.Date);
-
             var numberOfDays = ((endDate - startDate)?.Days) + 1;
-
             var filterDate = startDate?.AddDays(day);
 
             return View(new MyAgendaViewModel
@@ -52,14 +47,14 @@ namespace FrontEnd.Controllers
             });
         }
 
-        public async Task<IActionResult> OnPostAsync(int sessionId)
+        public async Task<IActionResult> Add(int sessionId)
         {
             await _apiClient.AddSessionToAttendeeAsync(User.Identity.Name, sessionId);
 
             return View();
         }
 
-        public async Task<IActionResult> OnPostRemoveAsync(int sessionId)
+        public async Task<IActionResult> Remove(int sessionId)
         {
             await _apiClient.RemoveSessionFromAttendeeAsync(User.Identity.Name, sessionId);
 

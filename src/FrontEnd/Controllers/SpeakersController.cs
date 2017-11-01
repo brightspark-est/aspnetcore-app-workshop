@@ -25,7 +25,7 @@ namespace FrontEnd.Controllers
             IEnumerable<SpeakerResponseDto> speakers = await _apiClient.GetSpeakersAsync();
             speakers = speakers.OrderBy(s => s.Name);
 
-            var model = new SpeakerViewModel
+            var model = new SpeakersViewModel
             {
                 Speakers = speakers
             };

@@ -30,9 +30,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-action="Index" asp-controller="Search">Search</a></li>
-                    <li><a asp-action="Index" asp-controller="MyAgenda">Agenda</a></li>
+                    <li><a asp-action="Index" asp-controller="Attendees">Attendee</a></li>
+                    <li><a asp-action="Index" asp-controller="MyAgendas">My Agenda</a></li>
+                    <li><a asp-action="Index" asp-controller="Searchs">Search</a></li>
+                    <li><a asp-action="Index" asp-controller="Sessions">Session</a></li>
                     <li><a asp-action="Index" asp-controller="Speakers">Speakers</a></li>
+                    <li><a asp-action="Index" asp-controller="Status">Status</a></li>
                     <li authz="true"><a asp-page="/MyAgenda">My Agenda</a></li>
                 </ul>
                 <form asp-controller="account" asp-action="logout" method="post" id="logoutForm" class="navbar-right">

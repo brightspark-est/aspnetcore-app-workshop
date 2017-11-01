@@ -9,6 +9,15 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="UserName" value="@User.Identity.Name" type="hidden" />
     <div class="form-group">
+        <label asp-for="UserName" class="control-label"></label>
+        <div class="row">
+            <div class="col-md-6">
+                <input asp-for="UserName" class="form-control" />
+            </div>
+        </div>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="FirstName" class="control-label"></label>
         <div class="row">
             <div class="col-md-6">

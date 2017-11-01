@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
 public interface IApiClient
 {
     Task<List<SessionResponseDto>> GetSessionsAsync();
@@ -13,7 +14,6 @@ public interface IApiClient
     Task AddAttendeeAsync(AttendeeDto attendee);
     Task<AttendeeResponseDto> GetAttendeeAsync(string name);
     Task DeleteSessionAsync(int id);
-
     Task<List<SessionResponseDto>> GetSessionsByAttendeeAsync(string name);
     Task AddSessionToAttendeeAsync(string name, int sessionId);
     Task RemoveSessionFromAttendeeAsync(string name, int sessionId);

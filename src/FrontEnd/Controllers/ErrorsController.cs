@@ -17,7 +17,6 @@ namespace FrontEnd.Controllers
             _error = error;
         }
 
-
         public void OnGet()
         {
             _error.RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
