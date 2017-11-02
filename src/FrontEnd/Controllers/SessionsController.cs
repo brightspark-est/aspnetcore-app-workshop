@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
 using FrontEnd.ViewModels;
-using ConferenceDTO;
 
 namespace FrontEnd.Controllers
 {

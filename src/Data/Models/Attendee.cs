@@ -24,9 +24,20 @@ namespace Data.Models
         [StringLength(256)]
         public string EmailAddress { get; set; }
 
-
         public ICollection<ConferenceAttendee> ConferenceAttendees { get; set; }
 
         public ICollection<Session> Sessions { get; set; }
+
+        public ConferenceDTO.AttendeeDto AsDto()
+        {
+            return new ConferenceDTO.AttendeeDto
+            {
+                ID = ID,
+                UserName = UserName,
+                FirstName = FirstName,
+                LastName = LastName,
+                EmailAddress = EmailAddress
+            };
+        }
     }
 }

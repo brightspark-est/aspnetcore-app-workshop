@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using BackEnd.Data;
+using BackEnd.Infrastructure;
 using ConferenceDTO;
 using Data;
 using Microsoft.AspNetCore.Mvc;

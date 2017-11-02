@@ -5,7 +5,7 @@
     Register as an atendee to get access to cool features.
 </p>
 
-<form method="post">
+<form method="post" action="@Url.Action("Post")">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="UserName" value="@User.Identity.Name" type="hidden" />
     <div class="form-group">
