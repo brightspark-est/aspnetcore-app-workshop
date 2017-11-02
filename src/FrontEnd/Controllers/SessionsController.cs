@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
 using FrontEnd.ViewModels;
 using ConferenceDTO;
-using Data.Models;
 
 namespace FrontEnd.Controllers
 {
@@ -26,7 +25,7 @@ namespace FrontEnd.Controllers
             var session = await _apiClient.GetSessionAsync(id);
             if (session == null)
             {
-                return RedirectToPage("/Index");
+                return View();
             }
 
             var sessions = await _apiClient.GetSessionsByAttendeeAsync(User.Identity.Name);

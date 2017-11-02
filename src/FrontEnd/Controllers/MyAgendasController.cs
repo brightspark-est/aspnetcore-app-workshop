@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd.Controllers
 {
-    public class MyAgendasController : HomesController
+    public class MyAgendasController : HomeController
     {
         public MyAgendasController(IApiClient client) : base(client)
         {

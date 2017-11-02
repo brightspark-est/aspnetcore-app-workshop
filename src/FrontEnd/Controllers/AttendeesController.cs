@@ -17,11 +17,23 @@ namespace FrontEnd.Controllers
             _apiClient = apiClient;
         }
 
-        //Get ja Post on vaja siia teha
-
-        public async Task<IActionResult> Index(AttendeeViewModel model)
+        public async Task<IActionResult> Index()
         {
-            //await _apiClient.AddAttendeeAsync(model.AsDto());
+            return View("Index");
+        }
+
+        [HttpGet("username")]
+        public async Task<IActionResult> Get(string username)
+        {
+            await _apiClient.GetAttendeeAsync(username);
+
+            return View("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(AttendeeViewModel model)
+        {
+            await _apiClient.AddAttendeeAsync(model.AsDto());
 
             return View("Index");
         }

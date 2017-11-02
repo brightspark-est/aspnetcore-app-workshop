@@ -1,9 +1,9 @@
-﻿@model FrontEnd.ViewModels.SessionsViewModel
+﻿@model FrontEnd.ViewModels.SessionViewModel
 
 
 <ol class="breadcrumb">
     <li><a asp-page="/Index">Agenda</a></li>
-    <li><a asp-page="/Index" asp-route-day="@Model.DayOffset">Day @(Model.DayOffset + 1)</a></li>
+    <li><a asp-controller="Sessions" asp-action="Index" asp-route-day="@Model.DayOffset">Day @(Model.DayOffset + 1)</a></li>
     <li class="active">@Model.Session.Title</li>
 </ol>
 
