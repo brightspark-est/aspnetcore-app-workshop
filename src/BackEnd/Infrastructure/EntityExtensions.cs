@@ -1,11 +1,11 @@
-﻿using BackEnd.Data;
+﻿using BackEnd.Infrastructure;
 using Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BackEnd.Data
+namespace BackEnd.Infrastructure
 {
     public static class EntityExtensions
     {

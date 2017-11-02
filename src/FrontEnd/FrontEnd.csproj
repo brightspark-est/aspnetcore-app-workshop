@@ -12,6 +12,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConferenceDTO\ConferenceDTO.csproj" />
-    <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 </Project>

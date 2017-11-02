@@ -1,29 +1,42 @@
 ﻿using FrontEnd.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace FrontEnd.Controllers
 {
     public class AttendeesController : Controller
     {
         private readonly IApiClient _apiClient;
-
+        
         public AttendeesController(IApiClient apiClient)
         {
-            _apiClient = apiClient;
+            _apiClient = apiClient;          
+        }
+ 
+        public async Task<IActionResult> Index()
+        {
+            return View();
         }
 
-        //Get ja Post on vaja siia teha
-
-        public async Task<IActionResult> Index(AttendeeViewModel model)
+        [HttpGet]
+        public async Task<IActionResult> Get(string username)
         {
-            //await _apiClient.AddAttendeeAsync(model.AsDto());
+            await _apiClient.GetAttendeeAsync(username);
 
-            return View("Index");
+            var vm = new AttendeeViewModel()
+            {
+                UserName = username
+            };
+
+            return View("Index", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(AttendeeViewModel model)
+        {
+            await _apiClient.AddAttendeeAsync(model.AsDto());
+
+            return RedirectToAction("Index");
         }
     }
 }
