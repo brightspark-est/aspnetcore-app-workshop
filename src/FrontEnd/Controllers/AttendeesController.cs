@@ -19,7 +19,6 @@ namespace FrontEnd.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> Get(string username)
         {
             await _apiClient.GetAttendeeAsync(username);

@@ -25,7 +25,7 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            return View();
+            return View(model);
         }
     }
 }
