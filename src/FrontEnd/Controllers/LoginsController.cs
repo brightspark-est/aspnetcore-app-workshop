@@ -17,13 +17,12 @@ namespace FrontEnd.Controllers
             _schemeProvider = schemeProvider;
         }
 
-        public IEnumerable<AuthenticationScheme> AuthSchemes { get; set; }
+        //public async Task Details()
+        //{
+        //    AuthSchemes = await _schemeProvider.GetRequestHandlerSchemesAsync();
+        //}
 
-        public async Task Details()
-        {
-            AuthSchemes = await _schemeProvider.GetRequestHandlerSchemesAsync();
-        }
-
+        
         public IActionResult Create(string scheme)
         {
             return Challenge(new AuthenticationProperties { RedirectUri = Url.Page("/Index") }, scheme);
