@@ -12,6 +12,11 @@ using System.Net.Http;
 using FrontEnd.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using FrontEnd.Filters;
+using Microsoft.AspNetCore.Authentication;
+using Data;
+using Microsoft.EntityFrameworkCore;
+using FrontEnd.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace FrontEnd
 {
@@ -27,6 +32,13 @@ namespace FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
             services.AddMvc(options =>
                 {
                     options.Filters.AddService(typeof(RequireLoginFilter));
@@ -52,23 +64,14 @@ namespace FrontEnd
                     options.AccessDeniedPath = "/Denied";
                 });
 
-
-            var twitterConfig = Configuration.GetSection("twitter");
-            if (twitterConfig["consumerKey"] != null)
-            {
-                authBuilder.AddTwitter(options => twitterConfig.Bind(options));
-            }
-
-            var googleConfig = Configuration.GetSection("google");
-            if (googleConfig["clientID"] != null)
-            {
-                authBuilder.AddGoogle(options => googleConfig.Bind(options));
-            }
+            SetupTwitter(authBuilder);
+            SetupGoogle(authBuilder);
 
             var httpClient = new HttpClient
             {
                 BaseAddress = new Uri(Configuration["serviceUrl"])
             };
+
             services.AddSingleton(httpClient);
             services.AddSingleton<IApiClient, ApiClient>();
 
@@ -81,6 +84,24 @@ namespace FrontEnd
                 });
             });
 
+        }
+
+        private void SetupTwitter(AuthenticationBuilder authBuilder)
+        {
+            var twitterConfig = Configuration.GetSection("twitter");
+            if (twitterConfig["consumerKey"] != null)
+            {
+                authBuilder.AddTwitter(options => twitterConfig.Bind(options));
+            }
+        }
+
+        private void SetupGoogle(AuthenticationBuilder authBuilder)
+        {
+            var googleConfig = Configuration.GetSection("google");
+            if (googleConfig["clientID"] != null)
+            {
+                authBuilder.AddGoogle(options => googleConfig.Bind(options));
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,14 +118,13 @@ namespace FrontEnd
             }
 
             app.UseStaticFiles();
-
             app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Attendees}/{action=Index}/{id?}");
             });
         }
     }

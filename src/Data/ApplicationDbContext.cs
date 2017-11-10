@@ -1,6 +1,7 @@
 ﻿using Data.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 //using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 
 namespace Data
@@ -10,7 +11,6 @@ namespace Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,10 +44,4 @@ namespace Data
 
         public DbSet<Attendee> Attendees { get; set; }
     }
-
-    //public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
-    //{
-    //    public ApplicationDbContext CreateDbContext(string[] args) =>
-    //        Program.BuildWebHost(args).Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    //}
 }

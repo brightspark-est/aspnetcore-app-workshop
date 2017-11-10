@@ -4,10 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Data;
 using Data.Models;
 
-namespace BackEnd
+namespace Data
 {
     public static class NDCSydneyData
     {
+        public static object ServiceProvider { get; internal set; }
+
         private class SessionData
         {
             public string Name { get; set; }

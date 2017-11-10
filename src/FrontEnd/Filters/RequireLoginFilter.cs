@@ -25,7 +25,7 @@ namespace FrontEnd.Filters
         {
             var urlHelper = _urlHelperFactory.GetUrlHelper(context);
 
-            var welcomePage = urlHelper.Page("/Welcome");
+            var welcomePage = urlHelper.Page("/Attendees");
 
             var ignoreRoutes = new[] {
                 urlHelper.Page("/Login"),
@@ -42,7 +42,7 @@ namespace FrontEnd.Filters
 
                 if (attendee == null)
                 {
-                    context.HttpContext.Response.Redirect(urlHelper.Page("/Welcome"));
+                    context.HttpContext.Response.Redirect(urlHelper.Page("/Attendees"));
 
                     return;
                 }

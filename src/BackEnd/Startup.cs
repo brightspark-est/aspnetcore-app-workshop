@@ -68,7 +68,7 @@ namespace BackEnd
                 return Task.CompletedTask;
             });
 
-            //NDCSydneyData.Seed(app.ApplicationServices);
+            NDCSydneyData.Seed(app.ApplicationServices);
         }
     }
 }

@@ -8,11 +8,11 @@ using FrontEnd.ViewModels;
 
 namespace FrontEnd.Controllers
 {
-    public class LoginsController : Controller
+    public class OldLoginsController : Controller
     {
         private readonly IAuthenticationSchemeProvider _schemeProvider;
 
-        public LoginsController(IAuthenticationSchemeProvider schemeProvider)
+        public OldLoginsController(IAuthenticationSchemeProvider schemeProvider)
         {
             _schemeProvider = schemeProvider;
         }
@@ -22,7 +22,7 @@ namespace FrontEnd.Controllers
         //    AuthSchemes = await _schemeProvider.GetRequestHandlerSchemesAsync();
         //}
 
-        
+
         public IActionResult Create(string scheme)
         {
             return Challenge(new AuthenticationProperties { RedirectUri = Url.Page("/Index") }, scheme);
@@ -30,7 +30,7 @@ namespace FrontEnd.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var vm = new LoginViewModel
+            var vm = new OldLoginViewModel
             {
                 AuthSchemes = await _schemeProvider.GetRequestHandlerSchemesAsync()
             };
