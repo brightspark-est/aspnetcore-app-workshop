@@ -14,6 +14,7 @@ using FrontEnd.ViewModels;
 using FrontEnd.ViewModels.AccountViewModels;
 using FrontEnd.Services;
 using FrontEnd.Extensions;
+using Data.Models;
 
 namespace FrontEnd.Controllers
 {
@@ -29,7 +30,7 @@ namespace FrontEnd.Controllers
         public AccountsController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender,
+            IEmailSender  emailSender,
             ILogger<AccountsController> logger)
         {
             _userManager = userManager;

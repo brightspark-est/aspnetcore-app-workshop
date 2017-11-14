@@ -14,6 +14,7 @@ using FrontEnd.ViewModels;
 using FrontEnd.ViewModels.ManageViewModels;
 using FrontEnd.Services;
 using FrontEnd.Extensions;
+using Data.Models;
 
 namespace FrontEnd.Controllers
 {

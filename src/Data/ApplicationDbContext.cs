@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.VisualStudio.Web.CodeGeneration.Design;
@@ -6,7 +7,8 @@ using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 
 namespace Data
 {
-    public class ApplicationDbContext : DbContext
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -30,18 +32,21 @@ namespace Data
             // Many-to-many: Session <-> Tag
             modelBuilder.Entity<SessionTag>()
                 .HasKey(st => new { st.SessionID, st.TagID });
+
+            base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<Attendee> Attendees { get; set; }
 
         public DbSet<Conference> Conferences { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
 
-        public DbSet<Track> Tracks { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
 
-        public DbSet<Speaker> Speakers { get; set; }
-
-        public DbSet<Attendee> Attendees { get; set; }
+        public DbSet<Track> Tracks { get; set; }
+        
     }
 }

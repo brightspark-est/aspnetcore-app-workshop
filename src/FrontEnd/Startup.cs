@@ -17,6 +17,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Data.Models;
 
 namespace FrontEnd
 {
@@ -42,12 +43,7 @@ namespace FrontEnd
             services.AddMvc(options =>
                 {
                     options.Filters.AddService(typeof(RequireLoginFilter));
-                })
-                //.AddRazorPagesOptions(options =>
-                //{
-                //    options.Conventions.AuthorizeFolder("/Admin", "Admin");
-                //})
-                ;
+                });
 
             services.AddScoped<RequireLoginFilter>();
 
@@ -64,6 +60,9 @@ namespace FrontEnd
                     options.AccessDeniedPath = "/Denied";
                 });
 
+
+
+
             SetupTwitter(authBuilder);
             SetupGoogle(authBuilder);
 
@@ -73,6 +72,7 @@ namespace FrontEnd
             };
 
             services.AddSingleton(httpClient);
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddSingleton<IApiClient, ApiClient>();
 
             services.AddAuthorization(options =>

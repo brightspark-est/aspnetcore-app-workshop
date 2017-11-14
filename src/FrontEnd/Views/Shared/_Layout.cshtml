@@ -34,7 +34,6 @@
                     <li><a asp-action="Index" asp-controller="MyAgendas">My Agenda</a></li>
                     <li><a asp-action="Index" asp-controller="Searchs">Search</a></li>
                     <li><a asp-action="Index" asp-controller="Speakers">Speakers</a></li>
-                    <li><a asp-action="Index" asp-controller="Status">Status</a></li>
                     <li authz="true"><a asp-page="/MyAgenda">My Agenda</a></li>
                 </ul>
                 <form asp-controller="account" asp-action="logout" method="post" id="logoutForm" class="navbar-right">
@@ -44,7 +43,6 @@
                             <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
                         </li>
                         <li authz="false"><a asp-controller="Accounts" asp-action="Login">Log in</a></li>
-                        <li authz="false"><a asp-controller="OldLogins" asp-action="Index">OldLog in</a></li>
                     </ul>
                 </form>
             </div>
